@@ -1,0 +1,15 @@
+{
+  "prettier.enable": false,
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "never"
+  },
+  "eslint.validate": [
+    "typescript",
+    "markdown",
+    "json",
+    "json5",
+    "jsonc"
+  ]
+}
