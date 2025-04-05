@@ -1,4 +1,4 @@
-import type { CommandInteraction, CreateApplicationCommandOptions } from 'oceanic.js'
+import type { CommandInteraction, CreateApplicationCommandOptions, InteractionOptions } from 'oceanic.js'
 import { join as joinPath } from 'node:path'
 import { env } from 'bun'
 import { Client, InteractionContextTypes, InteractionTypes } from 'oceanic.js'
@@ -34,6 +34,11 @@ await client.application.bulkEditGlobalCommands(commands.map(c => c.description)
 client.on('interactionCreate', async (interaction) => {
   if (interaction.type !== InteractionTypes.APPLICATION_COMMAND)
     return console.error(`unhandled interaction type: ${interaction.type}`)
+
+  console.log(
+    `@${interaction.user.username} /${interaction.data.name}`,
+    interaction.data.options.raw.filter(o => 'value' in o).map(o => `${o.name}:${o.value}`).join(' '),
+  )
 
   const usedCommand = commands.find(command => command.description.name === interaction.data.name)
   if (!usedCommand)
